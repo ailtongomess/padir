@@ -1,0 +1,23 @@
+<escritorio.nomeEmMaiuscula> = bold(uppercase(<escritorio.nome>))
+<cliente.representanteLegal.nomeCompletoEmMaiuscula> = bold(uppercase(<cliente.representanteLegal.nomeCompleto>))
+<proposta.dataDeValidadePorExtenso> = expandedDate(<proposta.dataDeValidade>)
+<proposta.validade> = days(<proposta.dataDeValidade> - <proposta.dataDaSolicitacao>)
+<escritorio.numeroDeAdvogadosPorExtenso> = expandedNumber(<escritorio.numeroDeAdvogados>)
+<escritorio.numeroDeEstagiariosPorExtenso> = expandedNumber(<escritorio.numeroDeEstagiarios>)
+<escritorio.nome> = bold(<escritorio.nome>)
+<contrato.validadePorExtenso> = expandedNumber(<contrato.validade>)
+
+CASO SEJA PAGAMENTO MENSAL
+
+	<pgtoMensal.numDeSalMinPorExtenso> = bold(expandedNumber(<pgtoMensal.numDeSalMin>))
+	<pgtoMensal.valorSalMinPorExtenso> = expandedCurrency(<pgtoMensal.valorSalMin>)
+	<pgtoMensal.total> = <pgtoMensal.numDeSalMin> * <pgtoMensal.valorSalMin>
+	<pgtoMensal.total> = bold(<pgtoMensal.total>)
+	<pgtoMensal.totalPorExtenso> = bold(expandedCurrency(<pgtoMensal.total>))
+
+CASO SEJA PAGAMENTO HORAS TRABALHADAS POR PROJETO
+
+	<pgtoProj.horasTrabalhadas> = bold(<pgtoProj.horasTrabalhadas>)
+	<pgtoProj.total> = <pgtoProj.horasTrabalhadas> * <pgtoProj.valorDaHora>
+	<pgtoProj.total> = bold(<pgtoProj.total>)
+	<pgtoProj.totalPorExtenso> = bold(expandedCurrency(<pgtoProj.totalPorExtenso>))

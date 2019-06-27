@@ -1,0 +1,172 @@
++<escritorio> {
+	name = "Escritório"
+	request = "Insira as informações do escritório proponente"
+	+[nome] : String {
+		name = "Nome do escritório"
+	}
+	+[numeroDeAdvogados] : Integer {
+		name = "Quantidade de advogados do escritório"
+	}
+	+[numeroDeEstagiarios] : Integer {
+		name = "Quantidade de estagiários do escritório"
+	}
+	+[tempoDeAtuacao] : String {
+		name = "Tempo de atuação"
+		request = "A quanto tempo o escritório atua no ramo de consultoria?"
+		help = "Escreva o tempo de atuação juntamente com a unidade de medida (por exemplo, '5 anos')"
+	}
+	+|areasDeAtuacao| : String {
+		name = "Insira as áreas de atuação judicial do escritório"
+		lower = 3
+	}
+	-[nomeEmMaiuscula] : String
+	-[numeroDeAdvogadosPorExtenso] : String
+	-[numeroDeEstagiariosPorExtenso] : String
+}
+
++|membros| {
+	name = "Membros"
+	request = "Insira os dados dos prestadores de serviços advocatícios"
+	lower = 1
+	+[nome] : String {
+		name = "Nome do consultor"
+	}
+	+[cargo] : List ("Advogado(a)", "Estagiário(a)")  {
+		name = "Cargo do consultor"
+		default = "Advogado(a)"
+		atomic = true
+	}
+	+[temEmail] : Boolean {
+		name = "O consultor possui email?"
+	}
+	&[email] : String  {
+		name = "Email do consultor"
+	}
+}
+
++<cliente> {
+	name = "Cliente"
+	request = "Insira as informações do cliente"
+	help = "Dados da empresa a quem a proposta é dirigida"
+	+[nome] : String {
+		name = "Nome do cliente"
+	}
+	+[representanteLegal] {
+		name = "Representante legal"
+		request = "Insira as informações do representante legal do cliente"
+		+[nome] : String {
+			name = "Primeiro nome"
+		}
+		+[nomeCompleto] : String {
+			name = "Nome completo"
+		}
+		-[nomeCompletoEmMaiuscula] : String
+	}
+}
+
++<proposta> {
+	name = "Dados da proposta"
+	request = "Insira as informações da proposta propriamente"
+	+[dataDaSolicitacao] : Date {
+		name = "Data da solicitação"
+	}
+	+[modoDeEnvio] : List ("via courier", "por email", "em mãos") {
+		name = "Meio de envio"
+		atomic = true
+	}
+	+[dataDeValidade] : Date {
+		name = "Data de validade"
+	}
+	+[haveraPrestacaoDeServicosExtrajudiciais] : Boolean {
+		name = "Prestação de serviços extrajudiciais"
+		request = "Haverá prestação de serviços extrajudiciais?"
+	}
+	+[servicosConsultoriaPrestados] : List ( "PESQUISA", "REUNIÕES", "TREINAMENTO", "CONSULTA VERBAL - HORÁRIO DE EXPEDIENTE",
+									 		 "CONSULTA VERBAL - FORA DE EXPEDIENTE", "CONSULTA ONLINE - HORÁRIO DE EXPEDIENTE",
+											 "PARECERES POR ESCRITO", "ACOMPANHAMENTO DE PROCESSOS", "EXAME DE AUTOS DE PROCESSO", 
+											 "PODER DE PETICIONAMENTO", "REDIGIR CORRESPONDÊNCIAS", "ELABORAÇÃO DE CONTRATOS CONSTITUTIVOS",
+											 "ELABORAÇÃO DE ESTATUTOS", "INTERVENÇÃO PÚBLICA", "INTERVENÇÃO PARA SOLUÇÃO DE LITÍGIO", 
+											 "MEDIDAS CAUTELARES", "PROTESTOS E NOTIFICAÇÕES EXTRA JUDICIAIS", "HOMOLOGAÇÕES TRABALHISTAS",
+											 "DISSÍDIOS, CONVENÇÕES E MEDIAÇÕES", "EXECUÇÕES DE TÍTULOS DE CRÉDITO",
+											 "ACOMPANHAMENTO DE LICITAÇÕES", "RECURSOS ADMINISTRATIVOS", "ADVOCACIA PREVENTIVA") {
+		name = "Serviços prestados"
+		request = "Quais serviços serão prestados dentro da consultoria?"
+		atomic = false
+		lower = 5
+	}
+	+[tipoDePrestacao] : List ("MENSAL", "PROJETO") {
+		name = "Tipo de prestação dos serviços"
+		help = "Se refere à forma de remuneração que serão cobrados os serviços advocatícios"
+		atomic = true
+	}
+	+[desejaAdicionarServicosAdicionais] : Boolean {
+		name = "Adição de serviços adicionais"
+		request = "Deseja adicionar serviços adicionais?"
+	}
+	-[dataDeValidadePorExtenso] : String
+	-[validade] : Integer,
+}
+
+
++<pgtoMensal> {
+	name = "Forma de remuneração - mensal"
+	request = "Insira os dados sobre a remuneração do projeto"
+	+[numDeSalMin] : Integer {
+		name = "Quantidade de salários mínimos cobrados"
+	}
+	+[valorSalMin] : Currency {
+		name = "Valor do salário mínimo"
+		default = 937.00
+	}
+	-[valorSalMinPorExtenso] : String
+	-[numDeSalMinPorExtenso] : String
+	-[total] : Currency
+	-[totalPorExtenso] : String
+}
+
++<pgtoProj> {
+	name = "Forma de remuneração - projeto"
+	request = "Insira os dados sobre a remuneração do projeto"
+	+[horasTrabalhadas] : Integer {
+		name = "Quantidade de horas trabalhadas no projeto"
+	}
+	+[valorDaHora] : Currency {
+		name = "Valor da hora trabalhada"
+	}
+	-[valorDaHoraPorExtenso] : String
+	-[total] : Currency
+	-[totalPorExtenso] : String
+}
+
++|servicosAdicionais| : Text {
+	name = "Serviços adicionais"
+	request = "Insira os serviços adicionais requisitados, sem pontuação ao final do texto"
+	lower = 1
+}
+
++<contrato> {
+	name = "Dados do contrato"
+	request = "Insira os dados básicos do contrato caso entre em vigor"
+	+[validade] : Integer {
+		name = "Prazo de validade do contrato em anos"
+		help = "Digite a validade do contrato, caso entre em vigos, em anos."
+	},
+	-[validadePorExtenso] : String
+}
+
++<disposicoesFinais> {
+	name = "Informações gerais da proposta"
+	request = "Insira as informações referentes à proposta"
+	+[data] : Date {
+		name = "Data de assinatura"
+	}
+	+[local] : String {
+		name = "Local de assinatura"
+	}
+	+[advogadoPrincipal] {
+		name = "Advogado principal"
+		+[nome] : String {
+			name = "Nome completo"
+		}
+	}
+}
