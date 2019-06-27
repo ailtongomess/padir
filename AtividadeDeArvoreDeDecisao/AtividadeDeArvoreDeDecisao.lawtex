@@ -1,0 +1,71 @@
+template[TEMP_AtividadeDaArvoreDeDecisoes] { 
+	metainfo { 
+		language = "pt_BR"
+		name = "Árvore de decisões"
+		declarations {
+			+<equipeDeConsultores> : List ("Rodrigo Mendes", "Mustafá Fraiha", "Cotoneide dos Santos") {
+				name = "Equipe de Consultores"
+				request = "Selecione os membros da equipe de consultores"
+				help = "Selecione todos os membros que desenvolverão os trabalhos no âmbito desta proposta de honorários"
+				atomic = false
+			},
+			+<formasDePagamento> : StructFormasDePagamento,
+			struct[StructFormasDePagamento] {
+				name = "Formas de pagamento"
+				fields {
+					+[formaDePagamento] : List ("Por mês", "Por projeto") {
+						name = "Forma de pagamento"
+						request = "Selecione a forma de pagamento"
+						atomic = true
+					}, 
+					if ([formaDePagamento] == "Por mês") {
+						+[numeroDeSalarioMin] : Integer {
+							name = "Número de salários mínimos"
+							request = "Informe o número de salários mínimos"
+						}, 
+						-[valorDoSalarioMinimo] : Currency,
+						-[valorTotaldoSalario] : Currency
+					} else {
+						+[horasTrabalhadas] : Integer {
+							name = "Número de horas trabalhadas"
+							request = "Informe o número de horas trabalhadas"
+							help = "Por exemplo, digite '40' para informar que o regime de trabalho é de 40 horas"
+						},
+						+[valorHorasTrabalhadas] : Currency {
+							name = "Valor das horas trabalhadas"
+							request = "Informe o valor das horas a serem trabalhadas"
+						},
+						-[valorTotalProjeto] : Currency
+					} 
+				}
+			}
+		} 
+	} 
+	head { 
+		title = "Atividade de Árvore de Decisão" 
+ 	} 
+ 	body {
+		operations { 
+			print bold("IV – Equipe de Consultores\n\n"),
+			if ("Rodrigo Mendes" IN <equipeDeConsultores>) {
+				print "Rodrigo Mendes(Advogado): E-mail: rodrigo.mendesadv@gmail.com\n\n" 
+			},
+			if ("Mustafá Fraiha" IN <equipeDeConsultores>) {
+				print "Mustafá Fraiha (Advogado): E-mail: mustafa.ivrahim@gmail.com\n\n"
+			}, 
+			if ("Cotoneide dos Santos" IN <equipeDeConsultores>) {
+				print "Cotoneide dos Santos (Estagiária de direito): E-mail: cotoneide@eu.sou\n\n"
+			},
+			print bold("V – Investimento e Condições de Pagamento\n\n"),
+			print "O valor da prestação dos serviços advocatícios é equivalente",
+			if (<formasDePagamento.formaDePagamento> == "Por mês") {
+				<formasDePagamento.valorDoSalarioMinimo> = 937,
+				<formasDePagamento.valorTotaldoSalario> = <formasDePagamento.numeroDeSalarioMin> * <formasDePagamento.valorDoSalarioMinimo>,
+				print " ao montante de " & <formasDePagamento.numeroDeSalarioMin> & " salários mínimos, que devem ser pagos com periodicidade mensal. O valor atual do salário mínimo é de R$ 937,00 (novecentos e trinta e sete reais), deste modo, o valor mensal a ser pago é de R$" & <formasDePagamento.valorTotaldoSalario> & "(" & expandedCurrency(<formasDePagamento.valorTotaldoSalario>) & ")."
+			} else {
+				<formasDePagamento.valorTotalProjeto> = <formasDePagamento.horasTrabalhadas> * <formasDePagamento.valorHorasTrabalhadas>,
+				print " a " & <formasDePagamento.horasTrabalhadas> & " horas trabalhadas dos membros, o qual deve ser pago ao final do projeto. O valor atual da hora trabalhada é de R$ " & <formasDePagamento.valorHorasTrabalhadas> & "(" & expandedCurrency(<formasDePagamento.valorHorasTrabalhadas>) & "), deste modo, o valor total a ser pago é de R$ " & <formasDePagamento.valorTotalProjeto> & "(" & expandedCurrency(<formasDePagamento.valorTotalProjeto>) & ")." 
+			}
+		}
+ 	}
+}
