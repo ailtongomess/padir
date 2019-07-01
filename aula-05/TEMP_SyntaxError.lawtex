@@ -1,0 +1,13 @@
+template[TEMP_SyntaxError] { 
+	metainfo { 
+		language = "pt_BR"
+	} 
+	head { 
+		title = "Meu primeiro programa" 
+ 	} 
+ 	body {
+		operations {
+			print "Olá Juiz!"
+		}
+ 	}
+}

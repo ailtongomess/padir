@@ -1,0 +1,16 @@
+template[TEMP_ExecutionError] { 
+	metainfo { 
+		language = "pt_BR"
+	} 
+	head { 
+		title = "Meu primeiro programa" 
+ 	} 
+ 	body {
+ 		declarations {
+ 			+<a> : Integer
+ 		}
+		operations {
+			print 23/<a>
+		}
+ 	}
+}

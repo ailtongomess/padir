@@ -1,0 +1,25 @@
+template[TEMP_Branch] { 
+	metainfo { 
+		language = "pt_BR"
+	} 
+ 	body {
+		operations {
+			use branch[BRC_Branch]
+		}
+ 	}
+}
+
+branch[BRC_Branch] {
+	name = "Nome do branch"
+	description = "Esse branch encapsula variados comandos, funções e métodos"
+	tags {
+		"keyword 1", "keyword 2"
+	}
+	declarations {
+		+<var> : String
+	}
+	operations {
+		print "String " & <var>,
+		use *period[PER_Periodo] 
+	} 
+}

@@ -1,0 +1,27 @@
+template[TEMP_Topic] { 
+	metainfo { 
+		language = "pt_BR"
+	} 
+ 	body {
+		operations {
+			use topic[TOP_Topic]
+		}
+ 	}
+}
+
+topic[TOP_Topic] {
+	name = "Nome do topic"
+	title = "Título do tópico"
+	description = "Esse topic encapsula variados comandos, funções e métodos. 
+				   Também exibe um título"
+	tags {
+		"keyword 1", "keyword 2"
+	}
+	declarations {
+		+<var> : String
+	}
+	operations {
+		print "String " & <var>,
+		use *period[PER_Periodo] 
+	} 
+}

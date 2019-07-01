@@ -1,0 +1,14 @@
+template[TEMP_PropostaHonorarios] { 
+	metainfo { 
+		language = "pt_BR"
+		name = "Proposta de Honorários"
+	} 
+	head { 
+		title = "CARTA PROPOSTA DE PRESTAÇÃO DE SERVIÇOS ADVOCATÍCIOS" 
+ 	} 
+ 	body {
+		operations {
+			print ""
+		}
+ 	}
+}

@@ -1,0 +1,20 @@
+template[TEMP_EstruturaBasica] { 
+	metainfo { 
+		declarations { ... }
+	} 
+	head { 
+		declarations { ... }
+ 		operations { ... }
+ 	} 
+ 	body {
+		declarations { ... }
+ 		operations { ... }
+ 	}
+ 	foot {
+		declarations { ... }
+ 		operations { ... }
+ 	}
+	extra { 
+		declarations { ... }
+	} 
+}

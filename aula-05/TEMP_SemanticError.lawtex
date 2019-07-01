@@ -1,0 +1,15 @@
+template[TEMP_SemanticError] { 
+	metainfo { 
+		language = "pt_BR"
+	} 
+	head { 
+		title = "Meu primeiro programa" 
+ 	} 
+ 	body {
+		operations {
+			beginList("roman", "inline"),
+			print "Olá Juiz!",
+			endList("Parâmetro inadequado")
+		}
+ 	}
+}

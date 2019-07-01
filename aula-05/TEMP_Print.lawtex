@@ -1,0 +1,19 @@
+template[TEMP_Print] { 
+	metainfo { 
+		language = "pt_BR"
+	} 
+	head { 
+		title = "Print: Impressão de textos" 
+ 	} 
+ 	body {
+		operations {
+			print "Olá Juiz! ",
+			print "Este texto continuará " & "na" & " mesma linha",
+			print ". Mas vou quebrar linha agora: \n",
+			print { 
+				[version = ".\tUsarei tabulação."],
+				[version = ".\nEm outra versão não usarei tabulação."]
+			}
+		}
+ 	}
+}
