@@ -1,0 +1,74 @@
+template[TEMP_ExercStructLDM] { 
+	metainfo { 
+		language = "pt_BR"
+		name = "Exercício Struct - Qualificação"
+		declarations {
+			struct[Parte] {
+				name = "Parte"
+				request = "Informação da qualificação das partes"
+				fields {
+					+[nome] : String {
+						name = "Nome"
+						request = "Informe o nome da parte" 
+					},
+					+[nacionalidade] : String {
+						name = "Nacionalidade"
+						request = "Informe a nacionalidade da parte" 
+					},
+					+[estadoCivil] : List("solteiro", "viúvo", "casado", "divorciado") {
+						name = "Estado Civil"
+						request = "Selecione o estado civil da parte" 
+						atomic = true
+					},
+					+[profissao] : String {
+						name = "Profissao"
+						request = "Informe a profissão da parte" 
+					},
+					+[rg_numero] : String {
+						name = "Número do RG"
+						request = "Informe o número do RG da parte" 
+					},
+					+[rg_orgaoEmissor] : String {
+						name = "Órgão emissor do RG"
+						request = "Informe o órgão emissor do RG da parte"
+						help = "Por exemplo, 'SSP' se for o Estado de São Paulo." 
+					},
+					+[cpf] : String where ("CPF") {
+						name = "CPF"
+						request = "Informe o número do CPF da parte" 
+					},
+					+[endereco_logradouro] : String {
+						name = "Logradouro do endereço"
+						request = "Informe o logradouro do endereço da parte" 
+					},
+					+[endereco_bairro] : String {
+						name = "Bairro do endereço"
+						request = "Informe o bairro do endereço da parte" 
+					},
+					+[endereco_cidade] : String {
+						name = "Cidade do endereço"
+						request = "Informe a cidade do endereço da parte" 
+					},
+					+[endereco_uf] : List ("AC","AL","AM","AP","BA","CE","DF","ES","GO","MA","MG","MS","MT","PA","PB","PE","PI","PR","RJ","RN","RO","RR","RS","SC","SE","SP","TO") {
+						name = "UF do endereço"
+						request = "Selecione o Estado do endereço da parte"
+						atomic = true 
+					},
+					+[endereco_cep] : String {
+						name = "Cep do endereço"
+						request = "Informe o cep do endereço da parte" 
+					}
+				}
+			}
+			+<parte> : Parte
+		}
+	} 
+	head { 
+		title = "Struct - Qualificação" 
+ 	} 
+ 	body {
+		operations {
+			print <parte.nome> & "," & <parte.nacionalidade> & "," & <parte.estadoCivil> & "," & [parte.profissao] & portador do documento de identidade RG & [parte.rg_numero] & "/" & [parte.rg_orgaoEmissor] & ", e inscrito no Cadastro de pessoa Física sob o número " & [parte.cpf], domiciliada na [parte.endereco_logradouro], [parte.endereco_bairro], [parte.endereco_cidade], [parte.endereendereco_uf], CEP [parte.endereco_cep], vem por meio de seu advogado..."
+		}
+ 	}
+}

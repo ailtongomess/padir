@@ -1,0 +1,22 @@
+template[TEMP_Listas] { 
+	metainfo { 
+		language = "pt_BR"
+		name = "Exercício - Teste de listas"
+		declarations {
+			+<listaAtomica> : List("option1", "option2", "option3") { 
+				name = "Lista atômica"
+				atomic = true
+			},
+			&<listaNaoAtomica> : List("option1", "option2", "option3") { 
+				name = "Lista não Atômica"
+				atomic = false
+			}
+		}
+	} 
+ 	body {
+		operations {
+			print "Lista atômica: " & <listaAtomica> & "\n",
+			print "Lista não atômica: " & <listaNaoAtomica>
+		}
+ 	}
+}

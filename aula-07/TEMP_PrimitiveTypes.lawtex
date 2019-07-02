@@ -1,0 +1,25 @@
+template[TEMP_PrimitiveTypes] { 
+	metainfo { 
+		language = "pt_BR"
+	} 
+	head { 
+		title = "Tipos primitivos de operandos" 
+ 	} 
+ 	body {
+		declarations {
+			+<s> : String,
+			+<t> : Text,
+			+<b> : Boolean,
+			+<i> : Integer,
+			+<r> : Real,
+			+<c> : Currency,
+			+<d> : Date,
+			+<h> : Time
+		}
+		operations {
+			print <s> & ", " & <t> & ", " & <b> & ", " & 
+			      <i> & ", " & <r> & ", " & <c>  & ", " & 
+			      <d>  & ", " & <h>
+		}
+ 	}
+}

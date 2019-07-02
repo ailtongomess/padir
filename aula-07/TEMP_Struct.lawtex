@@ -1,0 +1,26 @@
+template[TEMP_Struct] { 
+	metainfo { 
+		language = "pt_BR"
+		name = "Exercício de Struct"
+		declarations {
+			struct[Testemunha] {
+				name = "Testemunha"
+				fields {
+					+[nome] : String,
+					+[rg] : String { name = "RG" } 
+				}
+			}
+		}
+	} 
+	head { 
+		title = "Struct" 
+ 	} 
+ 	body {
+		declarations {
+			+<test> : Testemunha
+		}
+		operations {
+			print "Testemunha, nome " & <test.nome> & " e RG " & <test.rg>
+		}
+ 	}
+}

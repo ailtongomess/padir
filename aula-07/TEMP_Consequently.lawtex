@@ -1,0 +1,21 @@
+template[TEMP_Consequently] { 
+	metainfo { 
+		language = "pt_BR"
+		name = "Exercício - Declaração de variáveis"
+		declarations {
+			+<variable> : String { 
+				name = "Nome da variável"
+				request = "Pergunta da variável"
+				help = "Ajuda da variável"
+			}
+		}
+	} 
+	head { 
+		title = "Operandos, tipos e propriedades" 
+ 	} 
+ 	body {
+		operations {
+			print <variable>
+		}
+ 	}
+}

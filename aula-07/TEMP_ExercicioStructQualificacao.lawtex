@@ -1,0 +1,32 @@
+template[TEMP_ExercStructLDM] { 
+	metainfo { 
+		language = "pt_BR"
+		name = "Exercício Struct - Qualificação"
+		declarations {
+			struct[Parte] {
+				name = "Parte"
+				request = "Informação da qualificação das partes"
+				fields {
+					+[nome] : String { 
+						name = "Nome da parte"
+					},
+					+[nacionalidade] : String {
+						name = "Nacionalidade"
+					},
+					+[estadoCivil] : List () {
+
+					}
+				}
+			},
+			+<parte> : Parte
+		}
+	} 
+	head { 
+		title = "Struct - Qualificação" 
+ 	} 
+ 	body {
+		operations {
+			print <parte.nome> & "," & <parte.nacionalidade> & "," & <parte.estadoCivil> & "," & [parte.profissao] & portador do documento de identidade RG & [parte.rg_numero] & "/" & [parte.rg_orgaoEmissor] & ", e inscrito no Cadastro de pessoa Física sob o número " & [parte.cpf], domiciliada na [parte.endereco_logradouro], [parte.endereco_bairro], [parte.endereco_cidade], [parte.endereendereco_uf], CEP [parte.endereco_cep], vem por meio de seu advogado..."
+		}
+ 	}
+}
