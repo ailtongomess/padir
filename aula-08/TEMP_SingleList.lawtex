@@ -1,0 +1,24 @@
+template[TEMP_SingleList] { 
+	metainfo { 
+		language = "pt_BR"
+		name = "Exercício - Lista singular"
+		declarations {
+			list[UF] {
+				name = "Algumas unidades federativas"
+				options = ("São Paulo", "Rio de Janeiro", "Minas Gerais")
+				type = "String"
+			},
+			+<local> : List[UF] {
+	          atomic = true
+	        }
+		}
+	} 
+	head { 
+		title = "Lista singular" 
+ 	} 
+ 	body {
+		operations {
+			print "Locais escolhidos: " & <local>
+		}
+ 	}
+}

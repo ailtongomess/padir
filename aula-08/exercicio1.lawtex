@@ -1,0 +1,32 @@
+template[TEMP_Agregacao] { 
+	metainfo { 
+		language = "pt_BR"
+		name = "Exercício de pessoa física"
+		declarations {
+			struct[Pessoa] {
+				name = "Informações da pessoa jurídica"
+				fields {
+					+[razaoSocial] : String,
+					+[cnpj] : String,
+					+[endereco] : struct[Endereco] {
+						fields {
+							+[rua] : String,
+							+[numero] : String,
+							+[cidade] : String,
+							+[uf] : String
+						}
+					}
+				}
+			},
+			+<pessoa> : Pessoa
+		}
+	} 
+	head { 
+		title = "Agregação" 
+ 	} 
+ 	body {
+		operations { 
+			print <pessoa.razaoSocial> & ", " & " com inscrição no CNPJ/MF sob o número " & <pessoa.cnpj> & "com sede em " & <pessoa.endereco.rua> & ", nº " & <pessoa.endereco.numero> & ", na cidade de " & <pessoa.endereco.cidade> & "e Estado " & <pessoa.endereco.uf> 
+		} 
+ 	}
+}

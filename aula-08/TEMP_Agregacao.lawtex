@@ -1,0 +1,31 @@
+template[TEMP_Agregacao] { 
+	metainfo { 
+		language = "pt_BR"
+		name = "Exercício de Agregação de Structs"
+		declarations {
+			+<pessoa> : struct[Pessoa] {
+				fields {
+					+[nome] : String,
+					+[cpf] : String,
+					+[endereco] : struct[Endereco] {
+						fields {
+							+[rua] : String,
+							+[numero] : String,
+							+[cidade] : String,
+							+[uf] : String
+						}
+					}
+				}
+			}
+		}
+	} 
+	head { 
+		title = "Agregação" 
+ 	} 
+ 	body {
+		operations {
+			print <pessoa.nome> & ", " & <pessoa.cpf> & ", residente na rua " & <pessoa.endereco.rua> & ", " & 
+			<pessoa.endereco.numero> & ", " & <pessoa.endereco.cidade> & " - " & <pessoa.endereco.uf>
+		}
+ 	}
+}
