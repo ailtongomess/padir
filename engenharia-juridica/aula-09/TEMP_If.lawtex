@@ -1,0 +1,32 @@
+template[TEMP_If] { 
+	head { 
+		title = "Ifs" 
+ 	} 
+ 	body {
+		declarations {
+			+<frutas> : List("morango", "abacate", "uva", "banana") {
+				atomic = true
+			},
+			+<cores> : List("azul", "amarelo", "vermelho", "verde") {
+				atomic = false
+				lower = 2
+				upper = 3
+			}
+		}
+		operations {
+			if (<frutas> == "morango") {
+				print "Curto frutas vermelhas"
+			} elseif (<frutas> == "abacate" OR <frutas> == "banana") {
+				print "Curto frutas gordas"
+			} else {
+				print "Curto o fruto da vide"
+			},
+			if ("vermelho" IN <cores> OR "amarelo" IN <cores>) {
+				print " e adoro cores quentes"
+			},
+			if ("azul" IN <cores> OR "verde" IN <cores>) {
+				print ". Também gosto de cores frias."
+			}
+		}
+ 	}
+}

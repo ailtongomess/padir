@@ -1,0 +1,30 @@
+template[TEMP_VectorList] { 
+	head { 
+		title = "Vector-List" 
+ 	} 
+ 	body {
+		declarations {
+			+|iterador| : Vector[String],
+		    +<funcao> : List("Sócio", "Coordenadora", "Professor", "Outros") {
+		          atomic = false
+		    },
+		    +<funcionario> : List("Anderson", "Helena", "Isabela", "Leilani", "Pedro", "Roberto") {
+		          atomic = false
+		    }
+		}
+		operations {
+			|iterador| = <funcionario>,
+			foreach(<pessoa> IN |iterador|) where (separator = "- %f1;\n- %s2;\n- %p2; e\n- %l2.") {
+				print <pessoa>
+			},
+			if (<funcao> == "Professor") {
+				<funcionario>.options = {"Leilani", "Roberto"}
+			} elseif (<funcao> == "Sócio") {
+				<funcionario>.options = {"Helena", "Pedro", "Roberto"}				
+			} elseif (<funcao> == "Coordenadora") {
+				<funcionario>.options = {"Isabela", "Leilani"}				
+			},
+			print "\n" & <funcionario>
+		}
+ 	}
+}

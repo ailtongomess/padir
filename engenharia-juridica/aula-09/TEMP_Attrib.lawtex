@@ -1,0 +1,26 @@
+template[TEMP_Attrib] { 
+	metainfo { 
+		language = "pt_BR"
+		name = "Exercício - Atribuição"
+		declarations {
+			+<receitaTotal> : Currency { 
+				name = "Receita Total"
+				request = "Qual a receita total?"
+			},
+			+<despesaTotal> : Currency { 
+				name = "Despesa Total"
+				request = "Qual a despesa total?"
+			},
+			-<lucroLiquido> : Currency
+		}
+	} 
+	head { 
+		title = "Lucro Líquido" 
+ 	} 
+ 	body {
+		operations {
+			<lucroLiquido> = <receitaTotal> - <despesaTotal>,
+			print "O valor do lucro líquido da empresa é de " & <lucroLiquido>
+		}
+ 	}
+}
