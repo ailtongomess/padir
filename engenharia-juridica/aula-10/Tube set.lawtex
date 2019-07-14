@@ -1,0 +1,31 @@
+template[TEMP_TubeSet] { 
+	metainfo { 
+		language = "pt_BR"
+	} 
+	head { 
+		title = "Tube Set" 
+ 	} 
+ 	body {
+		declarations {
+			+|justaCausaExclusaoVector| : Vector[String] {
+				name = "Motivos justa causa de exclusão de sócios"
+				request = "Descreva o motivo de justa causa para exclusão de sócios"	
+			}
+		}
+		operations {
+			print "Poderá ser considerada justa causa, embora de forma não exaustiva, a ocorrência dos seguintes fatos:\b",
+			|justaCausaExclusaoVector|.set (0,"Violação de cláusula contratual ou falta de cumprimento dos deveres sociais"),
+			|justaCausaExclusaoVector|.set (1,"Comprometimento da continuidade das atividades normais da Sociedade ou do desenvolvimento e expansão dos negócios sociais"),
+			|justaCausaExclusaoVector|.set (2,"Uso indevido da firma ou denominação social"),
+			|justaCausaExclusaoVector|.set (3,"Divergência com os sócios que representem a maioria absoluta do capital social"),
+			|justaCausaExclusaoVector|.set (4,"Superveniência de incapacidade mental"),
+			|justaCausaExclusaoVector|.set (5,"Prática de atos que impeçam ou dificultem a condução normal dos negócios sociais"),
+			beginList("1"),
+			foreach(<elem> IN |justaCausaExclusaoVector|) {
+					print "\i\t" & <elem>
+			},
+			print "\i\t" & "ocorrência de qualquer outro motivo justo para a exclusão.\b",
+			endList()
+		}
+ 	}
+}

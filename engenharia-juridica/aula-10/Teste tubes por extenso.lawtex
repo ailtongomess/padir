@@ -1,0 +1,47 @@
+template[TEMP_TesteTubes] { 
+	metainfo { 
+		language = "pt_BR"
+		name = "Tubes por extenso e date" 
+	} 
+	head { 
+		title = "Tubes por extenso e date" 
+ 	} 
+ 	body {
+ 		declarations {
+			+<leilaniMendes> : struct[InfoLeilani] {
+				name = "Dados da Leilani"
+				request = "Informe as informações da queridíssima Leilani"
+				fields {
+					+[dataNascimento] : Date { 
+						name = "Data de nascimento"
+						request = "Adivinhe a data de nascimento da queridíssima Leilani"
+						help = "Caso queira aulas de Monitorias individuais selecione uma data a partir dos anos '90'"
+					},
+					-[idade] : Integer,
+					+[cache] : Currency {
+						name = "Cache de estrela"
+						request = "Informe o cache"
+						help = "Caso queira tirar uma nota boa no curso de Engenharia Jurídica insira '50.000'"
+					},
+					+[pretendentes] : Integer {
+						name = "Número de pretendentes"
+						request = "Informe o número de pretendentes que aparecem mensalmente na porta de Leilani"
+						default = 400
+					},
+					+[dataColetaInformacoes] : Date {
+						name = "Data"
+						request = "Informe a data de coleta de informações"
+					}
+				}
+			} 
+		}
+		operations {
+			<leilaniMendes.dataColetaInformacoes> = today(),
+			<leilaniMendes.idade> = minusDate(<leilaniMendes.dataColetaInformacoes>,<leilaniMendes.dataNascimento>, "years"),
+			print bold("Leilani Dian Mendes") & " é uma estrela que possui " & <leilaniMendes.idade> & " anos, ou seja, nasceu em " & expandedDate(<leilaniMendes.dataNascimento>) & ".\n",
+			print "Por ser uma linda estrela seu cachê diário consiste em R$" & <leilaniMendes.cache> & " (" & 
+				expandedCurrency(<leilaniMendes.cache>) & ").\n",
+			print "É uma estrelinha tão linda que possui um fã clube com a média de " & expandedNumber(<leilaniMendes.pretendentes>) & " novos pretendentes por mês." 	
+		}
+ 	}
+}

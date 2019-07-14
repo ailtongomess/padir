@@ -1,0 +1,83 @@
+template[TEMP_TubesDeValidacao] { 
+	metainfo { 
+		language = "pt_BR"
+		name = "Teste tubes de validação"
+		declarations {
+			+<pessoaFisica>: struct[Pessoa_Física] {
+				name = "Pessoa Física"
+				request = "Informe os dados da Pessoa Física"
+				fields {
+					+[nome] : String {
+						name = "Nome"
+						request = "Insira o nome do sócio"
+					},
+					+[profissao] : String {
+						name = "Profissão"
+						request = "Insira a profissão"
+					},
+					&[cpf] : String where ("CPF") {
+						name = "CPF"
+						request = "Informe o CPF"
+					},
+					+[endereco] : struct[Endereço] {
+					 	name = "Endereço"
+						fields {
+							+[logradouro] : String {
+								name = "Logradouro"
+							},
+							+[numero]: String {
+								name = "Número"
+							},
+							&[complemento] : String {
+								name = "complemento"
+							},
+							+[bairro] : String {
+								name = "Bairro"
+							},
+							+[cidade] : String {
+								name = "Cidade"
+							},
+							+[estado] : String {
+								name = "Estado"
+							},
+							+[cep] : String where ("CEP") {
+								name = "CEP"
+								request = "Insira o CEP"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	head { 
+		title = "Tubes de validação" 
+ 	} 
+ 	body {
+		operations {
+			print bold(uppercase(<pessoaFisica.nome>)) & ", ",
+			print lowercase(<pessoaFisica.profissao>) & ", inscrita no CPF/MF sob n.º  ",
+			if (<pessoaFisica.cpf>.isEmpty()) {
+				<pessoaFisica.cpf>.alert("O número do CPF deveria ser informado!")
+			} elseif (NOT isValidCPF(<pessoaFisica.cpf>)) {
+				<pessoaFisica.cpf>.error("ERRO: O número do CPF inserido não é valido. Insira o número correto!")
+			}, 
+			print <pessoaFisica.cpf>,
+			print ", residente e domiciliada em " & <pessoaFisica.endereco.logradouro> & ", número " & <pessoaFisica.endereco.numero> & ", " & 
+				printIf(
+					<pessoaFisica.endereco.complemento>.isNotEmpty(),
+					<pessoaFisica.endereco.complemento> & ","
+				) & " no Bairro " & <pessoaFisica.endereco.bairro> & ", na Cidade de " & <pessoaFisica.endereco.cidade> & ", Estado " & <pessoaFisica.endereco.estado>,
+			if (<pessoaFisica.endereco.cep>.isNotEmpty() AND NOT isValidCEP(<pessoaFisica.endereco.cep>)) {
+				<pessoaFisica.endereco.cep>.error("ERRO: O número do CEP inserido não é valido. Insira o número correto!")
+			},
+			print ", CEP " & strike(<pessoaFisica.endereco.cep>) & "." 
+		}
+ 	}
+}
+
+
+
+
+
+

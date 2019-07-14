@@ -1,0 +1,24 @@
+template[TEMP_TesteTubes] { 
+	metainfo { 
+		language = "pt_BR"
+		name = "Tubes textuais" 
+	} 
+	head { 
+		title = "Tubes textuais" 
+ 	} 
+ 	body {
+ 		declarations {
+			+<animal> : String {
+				name = "Teste"
+				default = "sapo"
+			}
+		}
+		operations {
+			print bold(it("O " & <animal> & " não lava o pé,")),
+			print "\nnão lava " & bold("porque") & " não quer,\n",
+			citation("ele mora no meio da lagoa,\n"),
+			print underline("não lava o pé porque não quer\n"),
+			print align(uppercase("Mas que chulé!"), "center")		
+		}
+ 	}
+}

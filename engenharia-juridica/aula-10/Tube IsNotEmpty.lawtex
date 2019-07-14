@@ -1,0 +1,30 @@
+template[TEMP_TubeIsNotEmpty] { 
+	metainfo { 
+		language = "pt_BR"
+	} 
+	head { 
+		title = "Tube Is Not Empty" 
+ 	} 
+ 	body {
+		declarations {
+			+<pessoa> : struct[Pessoa] {
+				fields {
+					+[nome] : String,
+					+[cpf] : String,
+					+[endereco] : struct[Endereco] {
+						fields {
+							+[rua] : String,
+							+[numero] : String,
+							&[complemento] : String,
+							+[cidade] : String,
+							+[uf] : String
+						}
+					}
+				}
+			}
+		}
+		operations {
+			print <pessoa.nome> & ", " & <pessoa.cpf> & ", residente na rua " & <pessoa.endereco.rua> & ", nº " & <pessoa.endereco.numero> & ", " & printIf(<pessoa.endereco.complemento>.isNotEmpty(), " com complemento " & <pessoa.endereco.complemento> & ",", "") & <pessoa.endereco.cidade> & " - " & <pessoa.endereco.uf> & "."
+		}
+	}
+}

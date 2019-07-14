@@ -1,0 +1,65 @@
+template[TEMP_TubeAdd] { 
+	metainfo { 
+		language = "pt_BR"
+	} 
+	head { 
+		title = "Tube para adicionar itens" 
+ 	} 
+ 	body {
+		declarations {
+			+<listaPedidosAcessorios> : List ("13º salário","13ª cesta alimentação","Anotação da CTPS","Auxílio alimentação", "Auxílio refeição", "Diferença salarial", "Férias", "FGTS", "PLR")
+			{
+				name = "Lista de pedidos acessórios"
+				atomic = false
+			},
+			-|pedidosAcessorios|: Vector[String] {
+				name = "Pedidos acessórios trabalhistas"
+				request = "Informe os pedidos acessórios que foram formulados"
+			}
+		}
+		operations {
+			print "Foram formulados os seguintes pedidos acessórios: ",
+			if ("13º salário" IN <listaPedidosAcessorios>) {
+				|pedidosAcessorios|.add("existe 13º salário") 
+				
+			},
+			if ("13ª cesta alimentação" IN <listaPedidosAcessorios>) {
+				|pedidosAcessorios|.add("existe 13ª cesta alimentação") 
+				},
+			if ("Anotação da CTPS" IN <listaPedidosAcessorios>) {
+				|pedidosAcessorios|.add("existe Anotação da CTPS") 
+
+			},
+			if ("Auxílio alimentação" IN <listaPedidosAcessorios>) {
+				|pedidosAcessorios|.add("existe Auxílio alimentação") 
+
+			},
+			if ("Auxílio refeição" IN <listaPedidosAcessorios>) {
+				|pedidosAcessorios|.add("existe Auxílio refeição") 
+
+			},
+			if ("Diferença salarial" IN <listaPedidosAcessorios>) {
+				|pedidosAcessorios|.add("existe Diferença salarial") 
+
+			},
+			if ("Férias" IN <listaPedidosAcessorios>) {
+				|pedidosAcessorios|.add("existe Férias") 
+
+			},
+			if ("FGTS" IN <listaPedidosAcessorios>) {
+				|pedidosAcessorios|.add("existe FGTS") 
+
+			},
+			if ("PLR" IN <listaPedidosAcessorios>) {
+				|pedidosAcessorios|.add("existe PLR") 
+
+			},
+			////////////////////
+			if (|pedidosAcessorios|.isNotEmpty()) {
+				print |pedidosAcessorios|,
+				print "."
+			}
+			//printIf(|pedidosAcessorios|.isNotEmpty(),|pedidosAcessorios| & ".", " ")
+		}
+ 	}
+}

@@ -1,0 +1,23 @@
+template[TEMP_Grammar] { 
+	metainfo { 
+		language = "pt_BR"
+ 	} 
+ 	body {
+		declarations {
+			*struct[Pessoa] {
+				name = "Pessoa"
+				fields {
+					+[nome] : String,
+					+[genero] : List("M", "F") {
+						atomic = true
+					}
+				}
+			},
+			+|pessoas| : Vector[*Pessoa]
+		}
+		operations {
+			print |pessoas|.grammar("Ele é legal"),
+			lowercase("<aliasElem|text>")
+		}
+ 	}
+}

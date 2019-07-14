@@ -1,0 +1,39 @@
+template[TEMP_Tabela] { 
+	metainfo { 
+		language = "pt_BR"
+	} 
+	head { 
+		title = "Tube de Tabela" 
+ 	} 
+ 	body {
+		declarations {
+			*struct[InformacoesProcesso] {
+				name = "Informações do processo"
+				fields {
+					+[numeroProcesso]: String where ("\d\d\d\d\d\d\d-\d\d\.\d\d\d\d.\d.\d\d.\d\d\d\d") {
+						name = "Número do processo"
+						request = "Informe o número do processo"
+					},
+					+[codigoInterno]: String where ("\d\d\d\d.\d\d\d\d.\d") {
+						name = "Código interno"
+						request = "Informe o número do código interno"
+						help = "Código utilizado internamente pelo responsável dessa ação"
+					}
+				}
+			},
+			+|informacoesTabela| : Vector[*InformacoesProcesso] {
+				name = "Informações do(s) processo(s)"
+			}
+		}
+		operations {
+			foreach(<processo> IN |informacoesTabela|) {
+				//Primeira coluna com número do processo	
+				<processo.numeroProcesso> = bold(align(<processo.numeroProcesso>,"center")),
+				//Segunda coluna com código interno
+				<processo.codigoInterno> = bold(align(<processo.codigoInterno>,"center")) 	
+			},
+
+			table(|informacoesTabela|,"vertical","group","nowrap","#fcc","#00f")
+		}
+	}
+}
